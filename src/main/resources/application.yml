@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+app:
+  kafka:
+    topic: events.v1
+    group: events-consumer-v1
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    consumer:
+      group-id: ${app.kafka.group}
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
