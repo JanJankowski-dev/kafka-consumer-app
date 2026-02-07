@@ -3,7 +3,7 @@ server:
 
 app:
   kafka:
-    topic: events.v1
+    topic: events.v2
     group: events-consumer-v1
 
 spring:
