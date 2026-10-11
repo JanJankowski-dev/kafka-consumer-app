@@ -3,14 +3,18 @@ server:
 
 app:
   kafka:
-    topic: events.v2
-    group: events-consumer-v1
+    topic: investment.order-proposals.v1
+    group: investment-order-proposals-v1
 
 spring:
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9094}
     consumer:
       group-id: ${app.kafka.group}
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        "[spring.json.use.type.headers]": false
+        "[spring.json.value.default.type]": com.example.consumer.adapter.in.kafka.OrderProposedV1
+        "[spring.json.trusted.packages]": com.example.consumer.adapter.in.kafka
